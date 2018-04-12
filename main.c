@@ -1,6 +1,6 @@
 /*
 
-Avaliação 1 de Redes de Computadores - ES41
+AvaliaÃ§Ã£o 1 de Redes de Computadores - ES41
 Alunos:
 Cristiane Harumi Servulo Masuki
 Gabriel Barbieri Lermen
@@ -45,10 +45,10 @@ void web(SOCKET cli_socket, int hit)
     char   *fstr;
     static char buffer[8096 + 1];
 
-    /* ler a requisição do navegador através da conexão TCP */
+    /* ler a requisiÃ§Ã£o do navegador atravÃ©s da conexÃ£o TCP */
     nbytes = recv(cli_socket, buffer, 8096, 0);
 
-    /* checar se recebemos uma requisição do navegador */
+    /* checar se recebemos uma requisiÃ§Ã£o do navegador */
     if (nbytes > 0 && nbytes < 8096)
     {
         buffer[nbytes] = 0;  /* conclude the buffer */
@@ -83,7 +83,7 @@ void web(SOCKET cli_socket, int hit)
         sprintf(buffer, "HTTP/1.0 200 OK\r\nContent-Type: %s\r\n\r\n", fstr);
         send(cli_socket, buffer, strlen(buffer), 0);
 
-        /* enviar arquivos em blocos de 8KB - o último pode ser menor */
+        /* enviar arquivos em blocos de 8KB - o Ãºltimo pode ser menor */
         while ((nbytes = fread(buffer, 1, 8096, fp)) > 0)
         {
             send(cli_socket, buffer, nbytes, 0);
@@ -143,7 +143,7 @@ int main(int argc, char **argv)
     }
     printf("Aguardando novas conexoes...\n\n\n");
 
-    /* Loop infinito para processar mais de uma requisição. */
+    /* Loop infinito para processar mais de uma requisiÃ§Ã£o. */
     for (hit = 1; ; hit++)
     {
         length = sizeof(cli_addr);
@@ -151,21 +151,19 @@ int main(int argc, char **argv)
         /* Aceitar conexao */
         socketfd = accept(listenfd, (struct sockaddr *) &cli_addr, &length);
 
-        //Connect to remote server
+        //Conectar ao servidor remoto
         /*  if (connect(socketfd , (struct sockaddr *)&serv_addr , sizeof(serv_addr)) < 0)
             {
-                puts("connect error");
-                return 1;
+                puts("Erro de Conexao");           
             }
-            puts("Connected");
+            puts("Conectado.");
 
             message = "GET / HTTP/1.1\r\n\r\n";
             if( send(socketfd , message , strlen(message) , 0) < 0)
             {
-                puts("Send failed");
-                return 1;
+                puts("Falha no Envio");
             }
-            puts("Data Send\n");
+            puts("Dados Enviados.\n");
 
             recv_size = recv(socketfd, server_reply, 2000, 0);
             server_reply[recv_size] = '\0';
